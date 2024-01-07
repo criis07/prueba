@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  mysql1-container:
+    image: mysql:latest
+    environment:
+      - DATABASE_URL=jdbc:mysql://docker-mysql:3306/prueba?autoReconnect=true&useSSL=false
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=prueba
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 3306:3306
+
+  app:
+    image: app:latest
+    ports:
+       - 8080:8080
+    depends_on:
+       - mysql1-container
